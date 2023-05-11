@@ -14,12 +14,18 @@ class UserResourceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function update(UserRequest $request)
     {
-        return User::all();
+        
+       $user = User::findOrFail($id);
+       $validated = $request->validated();
+       $user->name = $validated['name'];
+       $user->save();
+       
+       return $user;
     } 
-
-    public function store(UserRequest $request)
+    
+    public function email(UserRequest $request)
     {
         
         $validated = $request->validated();
@@ -31,16 +37,16 @@ class UserResourceController extends Controller
       
     } 
     
-    public function show(string $id)
+    public function password(UserRequest $request)
     {
-        return User::findOrFail($id);
-    }
+        
+        $validated = $request->validated();
+        $validated['password'] = Hash::make($validated['password']);
 
-    public function destroy(string $id)
-    {
-                
-        $User = User::findOrFail($id);
-        $User->delete();
-        return $User;
-    }
+        $user = User::create($validated);
+
+        return $user;
+      
+    } 
+    
 }
