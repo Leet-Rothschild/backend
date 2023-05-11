@@ -21,7 +21,14 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        if( request()->routeIS('user.store')) {
+        if( request()->routeIS('user.login')) {
+            return [
+            'email'      => 'required|string|email|max:255',
+            'password'   => 'required|min:8',
+         ];      
+      }
+
+     else if( request()->routeIS('user.store')) {
             return [
             'name' => 'required|string|max:255',
             'email'    => 'required|string|email|max:255',
