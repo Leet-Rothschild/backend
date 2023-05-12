@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\UserResourceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MessagesController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ProfileController;
+
 
 
 /*
@@ -43,14 +45,20 @@ Route::controller(UserResourceController::class)->group(function () {
     Route::get('/user/{id}',        'show');
     Route::post('/user',            'store')->name('user.store');
     Route::delete('/user/{id}',     'destroy');  
-    Route::put('/carousel/{id}',    'update')->name('user.update');
+    Route::put('/user/{id}',    'update')->name('user.update');
+    Route::put('/user/image/{id}',    'image')->name('user.image');
 
 });
 
 
 
-});
+// User Specific APIs
+Route::get('/profile/show',      [ProfileController::class, 'show'])->name('profile.show');
+Route::put('/profile/image',     [ProfileController::class, 'image'])->name('profile.image');
 
+
+});
+ 
 
 // Route::get('/messages', [MessagesController::class, 'index']); 
 // Route::get('/messages/{id}', [MessagesController::class, 'show']);
