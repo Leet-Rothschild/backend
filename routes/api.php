@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\UserResourceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MessagesController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\AiController;
 use App\Http\Controllers\Api\ProfileController;
 
 
@@ -25,6 +26,9 @@ use App\Http\Controllers\Api\ProfileController;
 //Public APIs
 Route::post('/login', [AuthController::class, 'login'])->name('user.login'); 
 Route::post('/user',  [AuthController::class, 'store'])->name('user.store');  
+
+//OCR
+Route::post('/ocr', [AiController::class, 'ocr'])->name('ocr.image');  
 
 //Private APIs
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -50,15 +54,13 @@ Route::controller(UserResourceController::class)->group(function () {
 
 });
 
-
-
 // User Specific APIs
 Route::get('/profile/show',      [ProfileController::class, 'show'])->name('profile.show');
 Route::put('/profile/image',     [ProfileController::class, 'image'])->name('profile.image');
 
 
 });
- 
+
 
 // Route::get('/messages', [MessagesController::class, 'index']); 
 // Route::get('/messages/{id}', [MessagesController::class, 'show']);

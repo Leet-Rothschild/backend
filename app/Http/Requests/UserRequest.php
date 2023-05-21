@@ -40,7 +40,7 @@ class UserRequest extends FormRequest
         'name' => 'required|string|max:255'
      ];      
         
-     if( request()->routeIS('user.image') || request()->routeIS('profile.image')) {
+     if( request()->routeIS('user.image') || request()->routeIS('profile.image') || request()->routeIS('ocr.image') ) {
         return [
         'image'   => 'required|image|mimes:jpg,bmp,png|max:2048',
      ];      
