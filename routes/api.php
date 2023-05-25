@@ -8,8 +8,8 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\MessagesController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AiController;
+use App\Http\Controllers\Api\LogController;
 use App\Http\Controllers\Api\ProfileController;
-
 
 
 /*
@@ -26,6 +26,11 @@ use App\Http\Controllers\Api\ProfileController;
 //Public APIs
 Route::post('/login', [AuthController::class, 'login'])->name('user.login'); 
 Route::post('/user',  [AuthController::class, 'store'])->name('user.store');  
+
+//Application Logs
+Route::post('/prompts',[LogController::class, 'store']);
+Route::get('/prompts', [LogController::class, 'index']);
+Route::delete('/prompts/{id}', [LogController::class, 'delete']);
 
 //OCR
 Route::post('/ocr', [AiController::class, 'ocr'])->name('ocr.image');  
